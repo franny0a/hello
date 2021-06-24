@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  labels:
+    app: hello
+  spec:
+   containers:
+    - name: hello
+      image: franny0a2@gmail.com/hello:latest
+      imagePullPolicy: Always
+      ports:
+        - name: hello
+          containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: hello
+    tier: hello
+  type: ClusterIP
